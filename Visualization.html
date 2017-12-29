@@ -77,15 +77,24 @@
             newDataSet.push(obj);
         });
 
-        var w = 1000;
-        var h = 800;
+        var margin = {top: 20, right: 30, bottom: 30, left: 40},
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+            margin = 20;
 
-        var svg = d3.select("body")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h)
-        .style("background", "red");
+        var maxSightings = 0;
 
+        newDataSet.forEach(function(data){
+          if(data.dia + data.tarde + data.noite > maxSightings)
+            maxSightings = data.dia + data.tarde + data.noite ;
+        });
+
+        var y_extent = [0,maxSightings];
+        var y_scale = d3.scaleLinear().range([height - margin, margin]).domain(y_extent);
+        var x_extent = [newDataSet[0].year, newDataSet[newDataSet.length-1].year];
+        var x_scale = d3.scaleLinear().range([margin, width - margin]).domain(x_extent);
+        var x_axis = d3.axisBottom(x_scale);
+        var y_axis = d3.axisLeft(y_scale);
 
     });
     </script>
