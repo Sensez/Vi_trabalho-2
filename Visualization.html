@@ -2,15 +2,37 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <style>
+        .bar {
+          fill: steelblue;
+        }
+
+        .axis text {
+          font: 10px sans-serif;
+        }
+
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+
+        .x.axis path {
+          display: none;
+        }
+    </style>
     <script src="d3/d3.js"></script>
   </head>
   <body>
     <script>
+
       var dates = [];
       var years = [];
       var dayligthSightings = [];
       var afternoonSightings = [];
       var nightSightings = [];
+      var newDataSet = [];
 
       d3.csv("complete.csv", function(error, data) {
         if (error) throw error;
@@ -45,6 +67,26 @@
               nightSightings[year] = 1;
           }
         });
+
+        years.sort().forEach(function(year) {
+            var obj = new Object;
+            obj["year"] = year;
+            obj["dia"] = dayligthSightings[year];
+            obj["tarde"] = afternoonSightings[year];
+            obj["noite"] = nightSightings[year];
+            newDataSet.push(obj);
+        });
+
+        var w = 1000;
+        var h = 800;
+
+        var svg = d3.select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .style("background", "red");
+
+
     });
     </script>
   </body>
