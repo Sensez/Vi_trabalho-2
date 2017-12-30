@@ -29,6 +29,24 @@
         stroke-width:2px;
       }
 
+      div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 100px;
+        height: 30px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightsteelblue;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+
+        .reference {
+        stroke: #636363;
+        stroke-width: 1.5px;
+    }
+
     </style>
     <script src="d3/d3.js"></script>
   </head>
@@ -80,10 +98,10 @@
         });
 
         var y_extent = [0,maxSightings];
-        var y_scale = d3.scaleLinear().range([height - margin, margin]).domain(y_extent);
+        var y_scale = d3.scaleLinear().range([height - margin, margin]).domain(y_extent).nice();
         var x_extent = [newDataSet[0].year, newDataSet[newDataSet.length-1].year];
-        var x_scale = d3.scaleLinear().range([margin, width - margin]).domain(x_extent);
-        var x_axis = d3.axisBottom(x_scale);
+        var x_scale = d3.scaleLinear().range([margin, width - margin]).domain(x_extent).nice();
+        var x_axis = d3.axisBottom(x_scale).tickFormat(d3.format("d"));
         var y_axis = d3.axisLeft(y_scale).ticks(maxSightings/500);
 
         var svg = d3.select("body")
@@ -91,6 +109,10 @@
         .attr("width", width)
         .attr("height", height)
         .style("background", "white");
+
+        var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
         d3.select("svg").append("g").attr("class", "x axis").attr("transform", "translate(0," + (height - margin) + ")").call(x_axis);
         d3.select("svg").append("g").attr("class", "y axis").attr("transform", "translate(" +  margin + ",0)").call(y_axis);
@@ -103,7 +125,18 @@
         circles.attr("cx", function (d, i) {  return x_scale(d.year);  })
         .attr("class", "dot")
         .attr("cy", function(d){return y_scale(d.Sightings)})
-        .attr("r", function () { return 5; });
+        .attr("r", function () { return 5; })
+        .on("mouseover", function(d) {
+           div.transition()
+          .style("opacity", .9)
+          .style("left", (d3.event.pageX-50) + "px")
+          .style("top", (d3.event.pageY-50) + "px")
+          .text("Year: " + d.year + "\n" + "Sightings: " + d.Sightings);
+        })
+        .on("mouseout", function(d) {
+          div.transition()
+          .style("opacity", 0);
+        });
 
         var line = d3.line()
         .x(function (d,i) { return x_scale(d.year) })
@@ -119,12 +152,27 @@
             .text("UFO Sightings over the years");
         svg.append("text")
             .attr("text-anchor", "middle")
-            .attr("transform", "translate("+ (margin+10) +","+(height/4)+")rotate(90)")
+            .attr("transform", "translate("+ (margin+18) +","+(height/4)+")rotate(270)")
             .text("Ammount of Sightings");
         svg.append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "translate("+ (width/1.1) +","+(height-(margin+6))+")")
             .text("Years");
+
+        // Add reference text
+        svg.append("text")
+          .attr("x", 300)
+          .attr("y", 400)
+          .text("The X-Files TV-Show Release");
+
+        // Add reference line
+        svg.append("line")
+          .attr("x1", 410)
+          .attr("y1", 410)
+          .attr("x2", 592)
+          .attr("y2", 530)
+          .attr("class", "reference");
+
     });
     </script>
   </body>
