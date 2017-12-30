@@ -15,6 +15,20 @@
         fill:none;
         stroke:black;
       }
+      .dot {
+        stroke: #2ca04e;
+        stroke-width: 2;
+        fill: #fff;
+      }
+      .dot:hover{
+        fill: #2ca04e;
+      }
+      path {
+        fill:none;
+        stroke:green;
+        stroke-width:2px;
+      }
+
     </style>
     <script src="d3/d3.js"></script>
   </head>
@@ -49,6 +63,9 @@
             occurencesPerYear[year] = 1;
         });
 
+        //last year is an outlier
+        years.sort().pop();
+
         years.sort().forEach(function(year) {
             var obj = new Object;
             obj["year"] = year;
@@ -77,6 +94,37 @@
 
         d3.select("svg").append("g").attr("class", "x axis").attr("transform", "translate(0," + (height - margin) + ")").call(x_axis);
         d3.select("svg").append("g").attr("class", "y axis").attr("transform", "translate(" +  margin + ",0)").call(y_axis);
+
+        var circles = svg.selectAll("circle")
+        .data(newDataSet)
+        .enter()
+        .append("circle");
+
+        circles.attr("cx", function (d, i) {  return x_scale(d.year);  })
+        .attr("class", "dot")
+        .attr("cy", function(d){return y_scale(d.Sightings)})
+        .attr("r", function () { return 5; });
+
+        var line = d3.line()
+        .x(function (d,i) { return x_scale(d.year) })
+        .y(function (d) { return y_scale(d.Sightings) });
+
+        d3.select("svg").append("path").attr("d", line(newDataSet));
+
+        svg.append("text")
+            .attr("x", (width/2))
+            .attr("y", (margin/1.5))
+            .attr("text-anchor", "middle")
+            .attr("font-size", "30px")
+            .text("UFO Sightings over the years");
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate("+ (margin+10) +","+(height/4)+")rotate(90)")
+            .text("Ammount of Sightings");
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate("+ (width/1.1) +","+(height-(margin+6))+")")
+            .text("Years");
     });
     </script>
   </body>
