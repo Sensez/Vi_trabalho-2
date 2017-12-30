@@ -11,6 +11,8 @@
       var width = 2500;
       var height = 1200;
 
+      newDataSet = [];
+
       var svg = d3.select("body")
       .append("svg")
       .attr("width", width)
@@ -19,10 +21,16 @@
       d3.csv("complete.csv", function(error, data) {
         if (error) throw error;
 
-      });
+        data.forEach(function(d) {
+          var obj = new Object;
+          obj["city"] = d.city;
+          obj["shape"] = d.shape;
+          obj["latitude"] = d.latitude;
+          obj["longitude"] = d.longitude;
+          newDataSet.push(obj);
+        });
 
       d3.json("countries.geo.json", function(data) {
-
         var group = svg.selectAll("g")
         .data(data.features)
         .enter()
@@ -35,8 +43,19 @@
         .attr("d", path)
         .attr("class", "area")
         .attr("fill", "steelblue");
-      })
 
+        svg.selectAll(".mark")
+        .data(newDataSet)
+        .enter()
+        .append("image")
+        .attr('class','mark')
+        .attr('width', 20)
+        .attr('height', 20)
+        .attr("xlink:href", "images/Alien.png")
+        .attr("transform", function(d) { return "translate(" + projection([d.longitude,d.latitude]) + ")";});
+
+        });
+    });
     </script>
   </body>
 </html>
