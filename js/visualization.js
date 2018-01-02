@@ -33,7 +33,7 @@ function draw(data) {
         obj["Sightings"] = occurencesPerYear[year];
         newDataSet.push(obj);
     });
-
+    
     var maxSightings = 0;
     newDataSet.forEach(function(data){
         if(data.Sightings > maxSightings)
