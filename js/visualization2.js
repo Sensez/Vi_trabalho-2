@@ -2,16 +2,6 @@ var dataSetComplete = {};
 var dataSetVisualization = [];
 
 function map(data) {
-    var margin = 40;
-    var width = 1100;
-    var height = 820;
-
-    var svg = d3.select("body")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .style("background", "lightblue");
-
     data.forEach(function(d) {
         if(isNaN(d.latitude) == false && isNaN(d.longitude) == false ) {
             var obj = new Object;
@@ -41,12 +31,21 @@ function map(data) {
     });
     
     console.log(dataSetVisualization.length);
-    //d3.json("data/countries.geo.json", drawAliensMap);
+    d3.json("data/countries.geo.json", drawAliensMap);
 
 }
 
 function drawAliensMap(data) {
+    var margin = 40;
+    var width = 1100;
+    var height = 820;
 
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .style("background", "lightblue");
+    
     var group = svg.selectAll("g")
         .data(data.features)
         .enter()
