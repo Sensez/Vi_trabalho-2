@@ -58,7 +58,7 @@ function map(data) {
             var year = parseInt(d.datetime.split("/")[2].split(" ")[0]);
             if (year >= valueMin && year <= valueMax) 
                 dataSetVisualization.push(obj);
-            
+
             if (year in dataSetComplete) {
                 listValue = dataSetComplete[year];
                 listValue.push(obj);
@@ -98,6 +98,7 @@ function map(data) {
 }
 
 function drawAliensMap(data) {
+
     $('#dayLight').prop('disabled', true);
     $('#afternoon').prop('disabled', true);
     $('#night').prop('disabled', true);
@@ -105,6 +106,12 @@ function drawAliensMap(data) {
     $("#load").css("display", "block");
     $( "#slider-3" ).slider( "disable" );
     console.log("dentro");
+
+
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
     var group = svg.selectAll("g")
         .data(data.features)
         .enter()
@@ -129,7 +136,18 @@ function drawAliensMap(data) {
         .attr('width', 20)
         .attr('height', 20)
         .attr("xlink:href", "images/Alien.png")
-        .attr("transform", function(d) { return "translate(" + projection([d.longitude,d.latitude]) + ")";});
+        .attr("transform", function(d) { return "translate(" + projection([d.longitude,d.latitude]) + ")";})
+        .on("mouseover", function(d) {
+            div.transition()
+                .style("opacity", .9)
+                .style("left", (d3.event.pageX-50) + "px")
+                .style("top", (d3.event.pageY-50) + "px")
+                .text("Shape: " + d.shape + "\n" + "City: " + d.city);
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .style("opacity", 0);
+        });
     console.log("feito");
     $( "#load" ).css("display", "none");
     $('#dayLight').prop('disabled', false);
