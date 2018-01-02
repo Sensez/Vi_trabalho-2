@@ -1,0 +1,48 @@
+.axis path{
+    fill:none;
+    stroke: black;
+}
+
+.axis {
+    font-size:8pt;
+    font-family:sans-serif;
+}
+
+.tick {
+    fill:none;
+    stroke:black;
+}
+
+.dot {
+    stroke: #2ca04e;
+    stroke-width: 2;
+    fill: #fff;
+}
+
+.dot:hover{
+    fill: #2ca04e;
+}
+
+path {
+    fill:none;
+    stroke:green;
+    stroke-width:2px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.reference {
+    stroke: #636363;
+    stroke-width: 1.5px;
+}
