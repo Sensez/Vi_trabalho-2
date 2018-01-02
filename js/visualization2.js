@@ -1,5 +1,5 @@
 function map(data) {
-    
+
     var margin = 40;
     var width = 1100;
     var height = 820;
@@ -13,12 +13,14 @@ function map(data) {
         .style("background", "lightblue");
 
     data.forEach(function(d) {
-        var obj = new Object;
-        obj["city"] = d.city;
-        obj["shape"] = d.shape;
-        obj["latitude"] = d.latitude;
-        obj["longitude"] = d.longitude;
-        newDataSet.push(obj);
+      if(isNaN(d.latitude) == false && isNaN(d.longitude) == false ){
+          var obj = new Object;
+          obj["city"] = d.city;
+          obj["shape"] = d.shape;
+          obj["latitude"] = d.latitude;
+          obj["longitude"] = d.longitude;
+          newDataSet.push(obj);
+        }
     });
 
     d3.json("data/countries.geo.json", function(data) {
