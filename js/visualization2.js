@@ -1,4 +1,5 @@
 function map(data) {
+	
 	var margin = 40;
     var width = 1100;
     var height = 820;
