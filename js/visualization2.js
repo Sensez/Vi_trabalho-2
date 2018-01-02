@@ -13,28 +13,30 @@ function map(data) {
         .style("background", "lightblue");
 
     data.forEach(function(d) {
-        var obj = new Object;
-        obj["datetime"] = d.datetime;
-        obj["city"] = d.city;
-        obj["country"] = d.country;
-        obj["shape"] = d.shape;
-        obj["comments"] = d.comments;
-        obj["latitude"] = d.latitude;
-        obj["longitude"] = d.longitude;
-        timeDay = getPartOfDay(d.datetime);
-        obj["timeDay"] = timeDay;
-        var year = parseInt(d.datetime.split("/")[2].split(" ")[0]);
-        if (year >= 2003 && year <= 2013) 
-            dataSetVisualization.push(obj);
-        
-        if (year in dataSetComplete) {
-            listValue = dataSetComplete[year];
-            listValue.push(obj);
-        }
-        else {
-            listValue = [];
-            listValue.push(obj);
-            dataSetComplete[year] = listValue;
+        if(isNaN(d.latitude) == false && isNaN(d.longitude) == false ) {
+            var obj = new Object;
+            obj["datetime"] = d.datetime;
+            obj["city"] = d.city;
+            obj["country"] = d.country;
+            obj["shape"] = d.shape;
+            obj["comments"] = d.comments;
+            obj["latitude"] = d.latitude;
+            obj["longitude"] = d.longitude;
+            timeDay = getPartOfDay(d.datetime);
+            obj["timeDay"] = timeDay;
+            var year = parseInt(d.datetime.split("/")[2].split(" ")[0]);
+            if (year >= 2003 && year <= 2013) 
+                dataSetVisualization.push(obj);
+            
+            if (year in dataSetComplete) {
+                listValue = dataSetComplete[year];
+                listValue.push(obj);
+            }
+            else {
+                listValue = [];
+                listValue.push(obj);
+                dataSetComplete[year] = listValue;
+            }
         }
     });
     
@@ -78,3 +80,5 @@ function getPartOfDay(datetime) {
     else
         return "night";
 }
+
+

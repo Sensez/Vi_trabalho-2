@@ -24,8 +24,6 @@ function draw(data) {
             occurencesPerYear[year] = 1;
     });
 
-    //last year is an outlier
-    years.sort().pop();
 
     years.sort().forEach(function(year) {
         var obj = new Object;
@@ -93,12 +91,12 @@ function draw(data) {
         .attr("text-anchor", "middle")
         .attr("font-size", "30px")
         .text("UFO Sightings over the years");
-        
+
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("transform", "translate("+ (margin+18) +","+(height/4)+")rotate(270)")
         .text("Ammount of Sightings");
-            
+
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("transform", "translate("+ (width/1.1) +","+(height-(margin+6))+")")
