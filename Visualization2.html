@@ -3,31 +3,35 @@
     <head>
         <meta charset="utf-8">
         <script src="d3/d3.js"></script>
-        <script type="text/javascript" src="js/visualization2.js"></script>
-        <!--link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+        <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/visualization2.css">
+        <script type="text/javascript" src="js/visualization2.js"></script>
     </head>
     <body>
-        <script>
-            d3.csv("data/complete.csv", map);
-        </script>
-        <!--div data-role="main" class="ui-content">
-            <div class="col-lg-5">
-            <div data-role="rangeslider">
-                <label for="price-min">Year</label>
-                <div class="col-lg-2">
-                    <input type="text" readonly="true" name="price-min" id="price-min" value="2003" min="1906" max="2013">
-                </div>
-                <label for="price-max">Year</label>
-                <div class="col-lg-2">
-                <input type="text" readonly="true" name="price-max" id="price-max" value="2013" min="1906" max="2013">
-                </div>
-            </div>
+        <div>
+            <script>
+                d3.csv("data/complete.csv", map);
+            </script>
         </div>
-        </div-->
+        <label id="load">Load map...</label>
+        <p>
+         <label for="years">Years:</label>
+         <input type="text" id="years">
+        </p>
+        <div id="slider-3"></div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="dayLight" checked id="dayLight">Day light</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="afternoon" checked id="afternoon">Afternoon</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="night" checked id="night">Night</label>
+        </div>
+        <button type="button" id="buttonReset" class="btn btn-danger">Reset Filters</button>
     </body>
 </html>
