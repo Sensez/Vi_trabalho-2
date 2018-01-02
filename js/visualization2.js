@@ -15,9 +15,9 @@ function map(data) {
             timeDay = getPartOfDay(d.datetime);
             obj["timeDay"] = timeDay;
             var year = parseInt(d.datetime.split("/")[2].split(" ")[0]);
-            if (year >= 2003 && year <= 2013) 
+            if (year >= 2003 && year <= 2013)
                 dataSetVisualization.push(obj);
-            
+
             if (year in dataSetComplete) {
                 listValue = dataSetComplete[year];
                 listValue.push(obj);
@@ -29,7 +29,7 @@ function map(data) {
             }
         }
     });
-    
+
     console.log(dataSetVisualization.length);
     d3.json("data/countries.geo.json", drawAliensMap);
 
@@ -45,7 +45,11 @@ function drawAliensMap(data) {
         .attr("width", width)
         .attr("height", height)
         .style("background", "lightblue");
-    
+
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
     var group = svg.selectAll("g")
         .data(data.features)
         .enter()
@@ -67,7 +71,18 @@ function drawAliensMap(data) {
         .attr('width', 20)
         .attr('height', 20)
         .attr("xlink:href", "images/Alien.png")
-        .attr("transform", function(d) { return "translate(" + projection([d.longitude,d.latitude]) + ")";});
+        .attr("transform", function(d) { return "translate(" + projection([d.longitude,d.latitude]) + ")";})
+        .on("mouseover", function(d) {
+            div.transition()
+                .style("opacity", .9)
+                .style("left", (d3.event.pageX-50) + "px")
+                .style("top", (d3.event.pageY-50) + "px")
+                .text("Shape: " + d.shape + "\n" + "City: " + d.city);
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .style("opacity", 0);
+        });
 }
 
 function getPartOfDay(datetime) {
@@ -79,5 +94,3 @@ function getPartOfDay(datetime) {
     else
         return "night";
 }
-
-
