@@ -50,7 +50,7 @@ function map(data) {
     var yearMax = valueMax;
 
     data.forEach(function(d) {
-        if(isNaN(d.latitude) == false && isNaN(d.longitude) == false ) {
+        if(!(d.latitude === "0" && d.longitude === "0.0")) {
             var obj = new Object;
             obj["datetime"] = d.datetime;
             obj["city"] = d.city;

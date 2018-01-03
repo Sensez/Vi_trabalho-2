@@ -9,7 +9,8 @@ function draw(data) {
     var height = 500;
 
     data.forEach(function(d) {
-        dates.push(d.datetime);
+        if(!(d.latitude === "0" && d.longitude === "0.0")) 
+            dates.push(d.datetime);
     });
 
     dates.forEach(function(entry) {
