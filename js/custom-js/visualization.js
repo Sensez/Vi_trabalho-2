@@ -6,7 +6,7 @@ function draw(data) {
 
     var margin = 40;
     var width = 800;
-    var height = 600;
+    var height = 500;
 
     data.forEach(function(d) {
         dates.push(d.datetime);
@@ -45,18 +45,19 @@ function draw(data) {
     var x_axis = d3.axisBottom(x_scale).tickFormat(d3.format("d"));
     var y_axis = d3.axisLeft(y_scale).ticks(maxSightings/500);
 
-    var svg = d3.select("body")
+    var svg = d3.select("#putGraphic")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        .style("background", "white");
+        .style("background", "white")
+        .attr("id","svg");
 
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    d3.select("svg").append("g").attr("class", "x axis").attr("transform", "translate(0," + (height - margin) + ")").call(x_axis);
-    d3.select("svg").append("g").attr("class", "y axis").attr("transform", "translate(" +  margin + ",0)").call(y_axis);
+    d3.select("#svg").append("g").attr("class", "x axis").attr("transform", "translate(0," + (height - margin) + ")").call(x_axis);
+    d3.select("#svg").append("g").attr("class", "y axis").attr("transform", "translate(" +  margin + ",0)").call(y_axis);
 
     var circles = svg.selectAll("circle")
         .data(newDataSet)
@@ -83,36 +84,37 @@ function draw(data) {
         .x(function (d) { return x_scale(d.year) })
         .y(function (d) { return y_scale(d.Sightings) });
 
-    d3.select("svg").append("path").attr("d", line(newDataSet)).attr("class","path_class");
+    d3.select("#svg").append("path").attr("d", line(newDataSet)).attr("class","path_class");
 
     svg.append("text")
         .attr("x", (width/2))
         .attr("y", (margin/1.5))
         .attr("text-anchor", "middle")
         .attr("font-size", "30px")
-        .text("UFO Sightings over the years");
+        .text("UFO Sightings ao longo dos anos");
 
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("transform", "translate("+ (margin+18) +","+(height/4)+")rotate(270)")
-        .text("Ammount of Sightings");
+        .text("Quantidade de Sightings");
 
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("transform", "translate("+ (width/1.1) +","+(height-(margin+6))+")")
-        .text("Years");
+        .text("Anos");
 
     // Add reference text
     svg.append("text")
         .attr("x", 300)
-        .attr("y", 400)
-        .text("The X-Files TV-Show Release");
+        .attr("y", 300)
+        .text("Lançamento do programa \"The X-Files\"")
+        .attr("font-family","Roboto");
 
     // Add reference line
     svg.append("line")
         .attr("x1", 410)
-        .attr("y1", 410)
+        .attr("y1", 310)
         .attr("x2", 592)
-        .attr("y2", 530)
+        .attr("y2", 430)
         .attr("class", "reference");
 }

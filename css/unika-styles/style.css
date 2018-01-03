@@ -1141,3 +1141,8 @@ p.subtitle {
 	transform: rotate(-45deg);
 }
 /* ===== End buttons ===== */
+
+#logo_ua {
+	width: 15%;
+  	height: 15%;
+}
