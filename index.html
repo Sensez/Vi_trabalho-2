@@ -92,14 +92,13 @@
 								<p>Eles andam ai!!!</p>
                                 <div class="extra-space-l"></div>
 							</div>
-							<!-- david meter um textinho muito breve sobre a primeira visualização (mapa) e depois meter o botão para essa tab-->
+
 							<div class="item">
 								<h1>Join with us</h1>
 								<p>To the greatest Journey</p>
 								<div class="extra-space-l"></div>
 								<a class="btn btn-blank page-scroll" href="#cta-section">View More!</a>
 							</div>
-							<!-- david meter um textinho muito breve sobre a segunda visualização (grafico) e depois meter o botão para essa tab-->
 							<div class="item">
 								<h1>I'm Unika</h1>
 								<p>One Page Responsive Theme</p>
@@ -120,7 +119,14 @@
                         <div class="page-header text-center wow fadeInUp" data-wow-delay="0.3s">
                             <h2>Sobre</h2>
                             <div class="devider"></div>
-                            <!-- david Breve introdução -->
+															<p> O trabalho desenvolvido foi para o âmbito da unidade curricular de Visualizacao de Informacão.
+																Este projeto baseou-se no desenvolver de duas visualizações distintas em D3 que, com base em informação contida num dataset
+																escolhido pelo grupo, permitam aos utilizadores obterem um ”insight” sobre a data apresentada exigindo-se o minimo esforço cognitivo possivel.
+																Como tema de trabalho foi escolhido um dataset de ”UFO Sightings” que	resulta de um conjunto de registos de avistamentos de objetos voadores nao
+																identificados ao longo do ultimo século.
+																Esta plataforma foi desenvolvida de modo a integrar as duas visualizações desenvolvidas numa unica página com devidas introduções aos dados representados
+																por cada uma das mesmas.
+															</p>
                             <p class="subtitle">little information</p>
                         </div>
                     </div>
@@ -136,8 +142,7 @@
                                     <span class="rotate-box-icon"><i class="fa fa-alien"></i></span>
                                     <div class="rotate-box-info">
                                         <h4>O que são UFO Sightings?</h4>
-                                        <!-- david textinho com a explicação -->
-                                        <p>Lorem ipsum dolor sit amet set, consectetur utes anet adipisicing elit, sed do eiusmod tempor incidist.</p>
+                                        <p>UFO Sightings corrrespondem a um avistamento de supostos objetos voadores não identificados (OVNIs).</p>
                                     </div>
                                 </a>
                             </div>
@@ -146,9 +151,9 @@
                                 <a href="#" class="rotate-box-1 square-icon wow zoomIn" data-wow-delay="0.2s">
                                     <span class="rotate-box-icon"><i class="fa fa-database"></i></span>
                                     <div class="rotate-box-info">
-                                        <h4>Base de dados</h4> <!-- david Não sabia que outro nome meter xD -->
-                                        <!-- david textinho sobre os dados, o que são, onde estão -->
-                                        <p>Lorem ipsum dolor sit amet set, consectetur utes anet adipisicing elit, sed do eiusmod tempor incidist.</p>
+                                        <h4>Dataset Considerado</h4>
+                                        <p>O dataset considerado pelo grupo para este trabalho resulta de um aglomerar de registos de avistamentos de OVNIs (objetos voadores não identificados) ao longo do ultimo século.
+																					Este dataset contém informações relativas ao local do avistamento, ao formato do objeto, à duração da sua presença, à sua data de avistamento e ainda comentários gerais efetuados pelos sujeitos.</p>
                                     </div>
                                 </a>
                             </div>
@@ -157,9 +162,9 @@
                                 <a href="#" class="rotate-box-1 square-icon wow zoomIn" data-wow-delay="0.4s">
                                     <span class="rotate-box-icon"><i class="fa fa-map-marker"></i></span>
                                     <div class="rotate-box-info">
-                                        <h4>Visualização 1</h4><!-- david Podes alterar a vontade -->
-                                        <!-- david textinho sobre a visualização 1 (isto estou a pensar por a visualização 1 a do mapa) -->
-                                        <p>Lorem ipsum dolor sit amet set, consectetur utes anet adipisicing elit, sed do eiusmod tempor incidist.</p>
+                                        <h4>World Map Sightings Locations</h4>
+																				<p>Através da visualização de "World Map Sightings Locations" é possivel de obter uma ideia geral das localizações onde ocorreram os avistamentos de OVNIs sendo
+																					possivel também de efetuar filtering sobre os mesmos segundo a altura do dia em que ocorreram e o range de anos de registos considerados. </p>
                                     </div>
                                 </a>
                             </div>
@@ -168,9 +173,9 @@
                                 <a href="#" class="rotate-box-1 square-icon wow zoomIn" data-wow-delay="0.6s">
                                     <span class="rotate-box-icon"><i class="fa fa-line-chart"></i></span>
                                     <div class="rotate-box-info">
-                                        <h4>Visualização 2</h4><!-- Podes alterar a vontade -->
-                                        <!-- david testinho sobre a visualização 2 (isto estou a pensar por a visualização 2 a do grafico)-->
-                                        <p>Lorem ipsum dolor sit amet set, consectetur utes anet adipisicing elit, sed do eiusmod tempor incidist.</p>
+                                        <h4>Sightings Per Year</h4>
+																				<p>Na visualização de "Sightings Per Year" é considerado um gráfico de linhas em que é demonstrado o crescimento do número de registos de avistamentos de OVNIs
+																					ao longo do ultimo século. </p>
                                     </div>
                                 </a>
                             </div>
@@ -189,10 +194,9 @@
                 <div class="page-header-wrapper">
                     <div class="container">
                         <div class="page-header text-center wow fadeInUp" data-wow-delay="0.3s">
-                            <h2>Visualização 1</h2>
-                            <div class="devider"></div>
-                            <!-- david Breve introdução -->
-                            <p class="subtitle">little information</p>
+                            <h2>World Map Sightings Locations</h2>
+                            <div class="devider"></div
+                            <p class="subtitle"> Distribuição de Sightings por localização.</p>
                         </div>
                     </div>
                 </div>
@@ -211,7 +215,7 @@
                     	<div class="extra-space-l"></div>
                     	<div class="row">
 	                    	<div class="col-md-12">
-	                    		<label id="load">Load map...</label>
+	                    		<label id="load">Loading map...</label>
 						        <p id="years" class="subtitle">Anos:
 						        </p>
 						        <div class="col-md-2 encher"></div>
@@ -259,15 +263,14 @@
                 <div class="page-header-wrapper">
                     <div class="container">
                         <div class="page-header text-center wow fadeInDown" data-wow-delay="0.4s">
-                            <h2>Visualização 2</h2>
+                            <h2>Sightings Per Year</h2>
                             <div class="devider"></div>
-                            <!-- david breve introdução -->
-                            <p class="subtitle">little information</p>
+                            <p class="subtitle">Crescimento de UFO Sightings ao longo dos anos considerados.</p>
                         </div>
                     </div>
                 </div>
                 <!-- End page header-->
-            
+
           		<div class="cta">
             		<div class="container">
                 		<div class="row">
@@ -292,7 +295,10 @@
                         <div class="page-header text-center wow fadeInDown" data-wow-delay="0.4s">
                             <h2>Conclusões</h2>
                             <div class="devider"></div>
-                            <!-- david escrever conclusões -->
+                            <p>Com o desenvolvimento das visualizações foi possível aprofundar os conhecimentos lecionados na aula teórica da unidade corricular tendo-os aplicado na prática.
+															Para além de termos aprofundado o nosso conhecimento em representação e apresentação de informação, foi também possivel ter uma ideia dos problemas subjacentes às mesmas sendo que foi assumido pelo grupo um espirito critico em relação ao próprio trabalho desenvolvido.
+															Foi também possivel de verificar o quão poderoso e util pode ser uma boa visualização sobre dados de forma a diminuir em grande parte o esforço cognitivo que seria necessário sem a utilização da mesma.
+															No fundo, duas visualizações foram definidas em que não só é possivel verificar o crescimento do número de registo de avistamento de OVNIs ao longo do ultimo século como também os locais onde mais avistamentos foram registados.</p>
                             <p class="subtitle">Those who trust us</p>
                         </div>
                     </div>
