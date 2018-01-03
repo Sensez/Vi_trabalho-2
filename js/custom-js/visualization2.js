@@ -8,8 +8,8 @@ $(document).on('change', '#afternoon', changeCheckbox);
 $(document).on('change', '#night', changeCheckbox);
 
 var margin = 40;
-var width = 1000;
-var height = 820;
+var width = 1100;
+var height = 535;
 var valueMin = 2003;
 var valueMax = 2013;
 
@@ -20,7 +20,10 @@ $(function() {
         values: [valueMin, valueMax],
         range: true,
         slide: function( event, ui ) {
-            $( "#years" ).val(ui.values[ 0 ] + " - "+ui.values[ 1 ] );
+            $( "#years" ).text("Anos: "+ui.values[ 0 ] + " - "+ui.values[ 1 ] );
+            $( "#slider-3" ).find("a.ui-slider-handle").each(function( index ) {
+                $(this).text(ui.values[index]);
+            });
         },
         change: function(event, ui) {
             timeDaysCheck = verifyItemCheck();
@@ -28,13 +31,16 @@ $(function() {
                 "block", timeDaysCheck[0], timeDaysCheck[1], timeDaysCheck[2]);
         }
     });
-    $( "#years" ).val($( "#slider-3" ).slider( "values", 0 ) +
+    $( "#years" ).text("Anos: "+$( "#slider-3" ).slider( "values", 0 ) +
         " - "+$( "#slider-3" ).slider( "values", 1 ) );
+    $( "#slider-3" ).find("a.ui-slider-handle").each(function( index ) {
+                $(this).text($( "#slider-3" ).slider( "values", index ));
+    });
 });
 
 
 function map(data) {
-    svg = d3.select("div")
+    svg = d3.select("#putMap")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -117,7 +123,7 @@ function drawAliensMap(data) {
         .enter()
         .append("g")
 
-    var projection = d3.geoMercator().scale(180);
+    var projection = d3.geoEquirectangular().scale(180);
     var path = d3.geoPath().projection(projection);
 
     var areas = group.append("path")
@@ -171,8 +177,11 @@ function getPartOfDay(datetime) {
 function setupSlider(min, max) {
     $('#slider-3').slider("option", "min", min);
     $('#slider-3').slider("option", "max", max);
-    $( "#years" ).val($( "#slider-3" ).slider( "values", 0 ) +
+    $( "#years" ).text("Anos: " + $( "#slider-3" ).slider( "values", 0 ) +
         " - "+$( "#slider-3" ).slider( "values", 1 ) );
+    $( "#slider-3" ).find("a.ui-slider-handle").each(function( index ) {
+                $(this).text($( "#slider-3" ).slider( "values", index ));
+    });
 }
 
 function changeDataSetVisualization(min, max, buttonDisplay, dayLightCheck, afternoonCheck, nightCheck) {
@@ -192,8 +201,11 @@ function changeDataSetVisualization(min, max, buttonDisplay, dayLightCheck, afte
 function clearFilter() {
     $("#slider-3").slider('values', 0, valueMin);
     $("#slider-3").slider('values', 1, valueMax);
-    $( "#years" ).val($( "#slider-3" ).slider( "values", 0 ) +
+    $( "#years" ).text("Anos: "+$( "#slider-3" ).slider( "values", 0 ) +
         " - "+$( "#slider-3" ).slider( "values", 1 ) );
+    $( "#slider-3" ).find("a.ui-slider-handle").each(function( index ) {
+                $(this).text($( "#slider-3" ).slider( "values", index ));
+    });
     $('#dayLight').prop('checked', true);
     $('#afternoon').prop('checked', true);
     $('#night').prop('checked', true);
@@ -226,6 +238,9 @@ function verifyAvailability() {
         }
     }
     $('#dayLight').prop('disabled', dayLightSightings != 0 ? false : true);
+    dayLightSightings == 0 ? $('#dayLightLabel').addClass('disable') : $('#dayLightLabel').removeClass('disable');
     $('#afternoon').prop('disabled', afternoonSightings != 0 ? false : true);
+    afternoonSightings == 0 ? $('#afternoonLabel').addClass('disable') : $('#afternoonLabel').removeClass('disable');
     $('#night').prop('disabled', nightSightings != 0 ? false : true);
+    nightSightings == 0 ? $('#nightLabel').addClass('disable') : $('#nightLabel').removeClass('disable'); 
 }

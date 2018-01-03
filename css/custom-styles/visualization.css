@@ -23,10 +23,10 @@
     fill: #2ca04e;
 }
 
-path {
-    fill:none;
-    stroke:green;
-    stroke-width:2px;
+.path_class {
+    fill: none;
+    stroke: green;
+    stroke-width: 2px;
 }
 
 div.tooltip {
@@ -45,4 +45,13 @@ div.tooltip {
 .reference {
     stroke: #636363;
     stroke-width: 1.5px;
+}
+
+.fa-alien {
+    background-image: url(../../images/grey_alien.png);
+    width: 25px;
+    height: 25px;
+    margin-right: 17px;
+    margin-left: 10px;
+    margin-top: 10px;
 }

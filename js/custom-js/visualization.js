@@ -83,7 +83,7 @@ function draw(data) {
         .x(function (d) { return x_scale(d.year) })
         .y(function (d) { return y_scale(d.Sightings) });
 
-    d3.select("svg").append("path").attr("d", line(newDataSet));
+    d3.select("svg").append("path").attr("d", line(newDataSet)).attr("class","path_class");
 
     svg.append("text")
         .attr("x", (width/2))
