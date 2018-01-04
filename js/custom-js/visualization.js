@@ -50,7 +50,7 @@ function map(data) {
     var yearMax = valueMax;
 
     data.forEach(function(d) {
-        if(!(d.latitude === "0" && d.longitude === "0.0")) {
+        if(!(parseInt(d.latitude) == 0 && parseInt(d.longitude) == 0)) {
             var obj = new Object;
             obj["city"] = d.city;
             obj["shape"] = d.shape;
