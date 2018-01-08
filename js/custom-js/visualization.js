@@ -52,6 +52,8 @@ function map(data) {
     data.forEach(function(d) {
         if(!(parseInt(d.latitude) == 0 && parseInt(d.longitude) == 0)) {
             var obj = new Object;
+            datetime_array = d.datetime.split("/");
+            obj["datetime"] = datetime_array[1]+"/"+datetime_array[0]+"/"+datetime_array[2];
             obj["city"] = d.city;
             obj["shape"] = d.shape;
             obj["latitude"] = d.latitude;
@@ -145,7 +147,7 @@ function drawAliensMap(data) {
                 .style("opacity", .9)
                 .style("left", (d3.event.pageX-50) + "px")
                 .style("top", (d3.event.pageY-50) + "px")
-                .text("Shape: " + d.shape + "\n" + "City: " + d.city);
+                .text(d.datetime + "\n" + "Shape: " + d.shape + "\n" + "City: " + d.city);
         })
         .on("mouseout", function(d) {
             div.transition()
